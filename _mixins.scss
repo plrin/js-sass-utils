@@ -1,0 +1,43 @@
+// grid mixin by http://thesassway.com/intermediate/simple-grid-mixins
+// works with inline-block instead of float
+@mixin row() {
+  font-size: 0;
+}
+
+@mixin col($col, $sum: 20, $gap: 0, $align: top, $first: false, $last: false) {
+  width: percentage($col/$sum);
+  font-size: 16px;
+  display: inline-block;
+  vertical-align: $align;
+  padding-left: if($first, 0, $gap);
+  padding-right: if($last, 0, $gap);
+}
+
+/* mobile first responsive mixin
+ * usage:
+ * mobile styles {
+ * attribut: property
+ * }
+ * tablet style:
+ * @include mq($md) {
+ *    attribute: property;
+ * }
+ */
+@mixin mq($size) {
+
+  $md: "(min-width: 750px)";
+  $lg: "(min-width: 1200px)";
+  $xl: "(min-width: 1920px)";
+
+  //@if $size == sm {
+  //  @media only screen and #{$sm} { @content; }
+  //}
+  @if $size == md {
+    @media only screen and #{$md} { @content; }
+  }
+  @else if $size == lg {
+    @media only screen and #{$lg} { @content; }
+  }
+}
+
+
